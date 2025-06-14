@@ -82,7 +82,8 @@ Deploy on Render/Heroku or Dockerize
 ---
 
 # 🤖 Chabot Image :
-![chatbot demo](https://github.com/user-attachments/assets/d47a64df-d83b-4641-b00e-8694665a5ffb)
+![Chatbot Demo](assets/chatbot demo.png)
+
 
 
 
