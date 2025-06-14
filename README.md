@@ -85,7 +85,7 @@ Deploy on Render/Heroku or Dockerize
 
 This is what the chatbot interface looks like during a real conversation:
 
-![Chatbot UI](https://raw.githubusercontent.com/Pranav-1111/chatbot/main/assets/chatbot_ui.png)
+![Chatbot UI](assets/chatbot_ui.png)
 
 
 
