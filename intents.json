@@ -1,0 +1,103 @@
+{
+  "intents": [
+    {
+      "tag": "password_reset",
+      "patterns": [
+        "reset",
+        "reset password",
+        "forgot password",
+        "I can't log in",
+        "change password",
+        "help me reset my password",
+        "how do I reset my password?",
+        "password recovery",
+        "forgot my login credentials"
+      ],
+      "responses": [
+        "To reset your password, click on 'Forgot Password' on the login screen.",
+        "You can reset your password using the password recovery link sent to your email.",
+        "Please follow the instructions in the email to change your password."
+      ]
+    },
+    {
+      "tag": "refund_policy",
+      "patterns": [
+        "refund",
+        "get a refund",
+        "return my money",
+        "how do I request a refund?",
+        "can I get my money back?",
+        "money back policy",
+        "I want to cancel and get a refund",
+        "refund please",
+        "return item and refund"
+      ],
+      "responses": [
+        "Our refund policy allows you to request a refund within 7 days of purchase.",
+        "To get a refund, please fill out the refund form on our support page.",
+        "Yes, you can request a refund by contacting our customer service team."
+      ]
+    },
+    {
+      "tag": "account_help",
+      "patterns": [
+        "account help",
+        "I need help with my account",
+        "can't access my account",
+        "account issue",
+        "account locked",
+        "help with login",
+        "trouble signing in",
+        "account not working",
+        "my account isn't loading",
+        "issue with my profile"
+      ],
+      "responses": [
+        "Please try logging out and logging back in again.",
+        "If your account is locked, use the 'Forgot Password' option.",
+        "You can contact support for further help with your account issues."
+      ]
+    },
+    {
+      "tag": "order_tracking",
+      "patterns": [
+        "order tracking",
+        "track my order",
+        "where is my order?",
+        "delivery status",
+        "order status",
+        "track shipment",
+        "when will my order arrive?",
+        "traking",
+        "track delivery",
+        "check order progress"
+      ],
+      "responses": [
+        "You can track your order from the 'My Orders' section on our website.",
+        "Please enter your tracking number to check the order status.",
+        "We’ve sent a tracking link to your registered email address."
+      ]
+    },
+    {
+      "tag": "subscription_cancel",
+      "patterns": [
+        "cancel subscription",
+        "I want to cancel my subscription",
+        "stop subscription",
+        "unsubscribe",
+        "end my subscription",
+        "cancel plan",
+        "how to cancel subscription",
+        "terminate subscription",
+        "subscription calcel",
+        "disable subscription"
+      ],
+      "responses": [
+        "You can cancel your subscription from the 'Subscription Settings' page.",
+        "Go to 'Account Settings' and choose 'Cancel Subscription'.",
+        "Please contact support if you're unable to cancel the subscription yourself."
+      ]
+    }
+  ],
+  "labels": ["password_reset", "refund_policy", "account_help", "order_tracking", "subscription_cancel"]
+}
