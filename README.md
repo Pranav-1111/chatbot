@@ -1,3 +1,8 @@
+# 🤖 AI Chatbot
+
+This project solves the problem of handling repetitive support queries using NLP. It classifies user intent from chat using BERT and provides relevant responses via a Flask API. Useful for support automation in e-commerce and SaaS products.
+
+
 # 🤖 AI Chatbot using BERT for Intent Classification
 
 This project is an AI-powered chatbot built using **BERT (Bidirectional Encoder Representations from Transformers)** to classify user queries into predefined intents and respond accordingly. It uses a **Flask backend**, a simple **HTML+JS frontend**, and is trained with HuggingFace's `transformers` library.
@@ -59,14 +64,10 @@ order_tracking	"Where is my order?"
 subscription_cancel	"I want to cancel my subscription"
 
 🛠️ Tech Stack
-Python 3.11+
-
-Flask
-
-HuggingFace Transformers
-
-PyTorch
-
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-lightgrey?logo=flask)
+![HuggingFace](https://img.shields.io/badge/Transformers-yellow?logo=huggingface)
+![PyTorch](https://img.shields.io/badge/PyTorch-red?logo=pytorch)
 HTML, CSS, JavaScript
 
 🧠 Future Improvements
@@ -77,6 +78,10 @@ Use SQLite or MongoDB for chat history
 Improve UI using React or Streamlit
 
 Deploy on Render/Heroku or Dockerize
+
+# 🤖 Chabot Demo
+![image](https://github.com/user-attachments/assets/b5567b96-d990-4bbd-92e4-937ff9f23807)
+
 
 🤝 Contributing
 Pull requests are welcome! If you find a bug or want to improve something, open an issue first.
