@@ -79,8 +79,10 @@ Improve UI using React or Streamlit
 
 Deploy on Render/Heroku or Dockerize
 
-# 🤖 Chabot Demo
-![chatbot demo](https://github.com/user-attachments/assets/ff3306b3-3a7a-44c1-bcd4-dfff99b760b8)
+---
+
+# 🤖 Chabot Image :
+![chatbot demo](https://github.com/user-attachments/assets/d47a64df-d83b-4641-b00e-8694665a5ffb)
 
 
 
