@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Xipra Chat</title>
+</head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',sans-serif;background-color:#ffffff;height:100vh;display:flex;justify-content:center;align-items:center;">
+
+  <!-- Phone Frame -->
+  <div style="width:100%;max-width:380px;height:90vh;border:1px solid #ccc;display:flex;flex-direction:column;background-color:white;position:relative;box-shadow:0 0 15px rgba(0,0,0,0.1);border-radius:15px;overflow:hidden;">
+
+    <!-- Header -->
+    <div id="chat-header" style="background-color:#007bff;color:white;padding:15px;font-size:18px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;">
+      <span style="flex:1;">Xipra Technology</span>
+      <button onclick="toggleDarkMode()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;">🌓</button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="chat-messages" style="flex:1;padding:10px;overflow-y:auto;background-color:#f1f9ff;display:flex;flex-direction:column;">
+      <!-- Chat will appear here -->
+    </div>
+
+    <!-- Input -->
+    <div style="display:flex;border-top:1px solid #ccc;background:#ffffff;">
+      <input id="chat-input" placeholder="Type a message" style="flex:1;padding:12px;font-size:14px;border:none;outline:none;background:#ffffff;" />
+      <button onclick="sendMessage()" style="padding:12px 16px;background-color:#007bff;color:white;border:none;cursor:pointer;">Send</button>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const chatMessages = document.getElementById('chat-messages');
+    const inputField = document.getElementById('chat-input');
+    let darkMode = false;
+
+    window.onload = () => {
+      const history = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+      if (history.length && confirm("Continue previous chat?")) {
+        history.forEach(({ sender, text }) => displayMessage(text, sender));
+      } else {
+        localStorage.removeItem('chatHistory');
+      }
+    };
+
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      document.body.style.backgroundColor = darkMode ? "#121212" : "#ffffff";
+      document.getElementById('chat-messages').style.backgroundColor = darkMode ? "#1e1e1e" : "#f1f9ff";
+      document.getElementById('chat-header').style.backgroundColor = darkMode ? "#222" : "#007bff";
+      document.getElementById('chat-input').style.backgroundColor = darkMode ? "#2c2c2c" : "#ffffff";
+      document.getElementById('chat-input').style.color = darkMode ? "#fff" : "#000";
+    }
+
+    function displayMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.textContent = text;
+      msg.style.margin = "5px 0";
+      msg.style.padding = "10px";
+      msg.style.borderRadius = "15px";
+      msg.style.maxWidth = "70%";
+      msg.style.alignSelf = sender === 'user' ? "flex-end" : "flex-start";
+      msg.style.backgroundColor = sender === 'user' ? "#d0e7ff" : "#ffffff";
+      msg.style.boxShadow = "0 1px 1px rgba(0,0,0,0.1)";
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const userMessage = inputField.value.trim();
+      if (!userMessage) return;
+      displayMessage(userMessage, 'user');
+      saveToHistory(userMessage, 'user');
+      inputField.value = '';
+
+      const typing = document.createElement('div');
+      typing.style.margin = "5px 0";
+      typing.style.padding = "10px";
+      typing.style.borderRadius = "15px";
+      typing.style.backgroundColor = "#ffffff";
+      typing.style.maxWidth = "50%";
+      typing.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      typing.className = 'typing';
+      chatMessages.appendChild(typing);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      try {
+        const res = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: userMessage })
+        });
+        const data = await res.json();
+        chatMessages.removeChild(typing);
+        displayMessage(data.response, 'bot');
+        saveToHistory(data.response, 'bot');
+      } catch (err) {
+        chatMessages.removeChild(typing);
+        const errorMsg = "Server error. Try again.";
+        displayMessage(errorMsg, 'bot');
+        saveToHistory(errorMsg, 'bot');
+        console.error(err);
+      }
+    }
+
+    function saveToHistory(text, sender) {
+      const history = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+      history.push({ sender, text });
+      localStorage.setItem('chatHistory', JSON.stringify(history));
+    }
+
+    // Typing animation styles
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .dot {
+        height: 6px;
+        width: 6px;
+        margin: 0 2px;
+        background-color: #999;
+        border-radius: 50%;
+        display: inline-block;
+        animation: bounce 1.4s infinite;
+      }
+      .dot:nth-child(2) { animation-delay: 0.2s; }
+      .dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
